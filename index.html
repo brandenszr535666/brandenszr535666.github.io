@@ -1,7 +1,56 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Display</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Roboto", sans-serif;
+            background-color: #1d1d1d;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        #text-container {
+            text-align: center;
+        }
+
+        .curved-text {
+            border-radius: 30px;
+            padding: 10px 20px;
+            display: inline-block;
+        }
+
+        #seized-text {
+            font-family: "Pacifico", cursive;
+            font-size: 2.5em;
+        }
+
+        #neptune-text {
+            font-family: "Exo 2", sans-serif;
+            font-weight: bold;
+            font-size: 4em;
+            color: #5DAEEA;
+        }
+
+        #join-text {
+            font-family: "Raleway", sans-serif;
+            font-size: 2.5em;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Exo+2:wght@700&family=Raleway:wght@300&family=Roboto&display=swap" rel="stylesheet">
+</head>
 <body>
-<h1>Hello World</h1>
-<p>I'm hosted with GitHub Pages.</p>
+    <div id="text-container">
+        <div id="seized-text" class="curved-text">SEIZED BY:</div>
+        <div id="neptune-text">NEPTUNE</div>
+        <div id="join-text" class="curved-text">JOIN US:</div>
+    </div>
 </body>
 </html>
