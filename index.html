@@ -8,49 +8,95 @@
         body {
             margin: 0;
             padding: 0;
-            font-family: "Roboto", sans-serif;
-            background-color: #1d1d1d;
+            font-family: Arial, sans-serif;
+            background-color: black;
             color: white;
             display: flex;
             align-items: center;
             justify-content: center;
             height: 100vh;
+            overflow: hidden;
         }
 
         #text-container {
-            text-align: center;
-        }
-
-        .curved-text {
-            border-radius: 30px;
-            padding: 10px 20px;
+            position: relative;
             display: inline-block;
         }
 
-        #seized-text {
-            font-family: "Pacifico", cursive;
-            font-size: 2.5em;
+        #cursor {
+            display: inline;
+            animation: blink 0.7s infinite;
         }
 
-        #neptune-text {
-            font-family: "Exo 2", sans-serif;
-            font-weight: bold;
-            font-size: 4em;
-            color: #5DAEEA;
+        @keyframes blink {
+            0%, 100% {
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
         }
 
-        #join-text {
-            font-family: "Raleway", sans-serif;
-            font-size: 2.5em;
+        #text {
+            display: inline;
         }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Exo+2:wght@700&family=Raleway:wght@300&family=Roboto&display=swap" rel="stylesheet">
 </head>
 <body>
     <div id="text-container">
-        <div id="seized-text" class="curved-text">SEIZED BY:</div>
-        <div id="neptune-text">NEPTUNE</div>
-        <div id="join-text" class="curved-text">JOIN US:</div>
+        <span id="cursor">|</span>
+        <span id="text"></span>
     </div>
+    <script>
+        const textArray = [
+            "Hello, I'm from Neptune",
+            "I came here to tell you that something never seen is going to happen.",
+            "But don't fear, it's gonna be fine.",
+        ];
+
+        const textElement = document.getElementById("text");
+        const cursorElement = document.getElementById("cursor");
+
+        let textIndex = 0;
+        let charIndex = 0;
+        let typing = true;
+
+        function typeText() {
+            const currentText = textArray[textIndex];
+
+            if (typing) {
+                if (charIndex < currentText.length) {
+                    textElement.textContent += currentText[charIndex];
+                    charIndex++;
+                    setTimeout(typeText, 50); // Typing speed
+                } else {
+                    typing = false;
+                    setTimeout(deleteText, 2000); // Display time
+                }
+            }
+        }
+
+        function deleteText() {
+            const currentText = textArray[textIndex];
+
+            if (charIndex >= 0) {
+                textElement.textContent = currentText.substring(0, charIndex);
+                charIndex--;
+                setTimeout(deleteText, 50); // Deleting speed
+            } else {
+                textIndex++;
+                typing = true;
+                charIndex = 0;
+
+                if (textIndex < textArray.length) {
+                    setTimeout(typeText, 1000); // Pause between texts
+                } else {
+                    cursorElement.style.display = "none"; // Hide cursor
+                }
+            }
+        }
+
+        typeText();
+    </script>
 </body>
 </html>
